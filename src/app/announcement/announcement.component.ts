@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./announcement.component.scss']
 })
 export class AnnouncementComponent {
-
+  message = 'message';
+  title ='title';
+  author = 'author';
 }
