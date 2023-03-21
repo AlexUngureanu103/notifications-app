@@ -1,5 +1,9 @@
+import { Category } from "./category";
+
 export interface Announcement {
-  title;
-  message;
-  author;
+  title:string;
+  message:string;
+  author:string;
+  category:Category;
+
 }
