@@ -1,10 +1,10 @@
+<app-categories (selectedCategory) ="onCategorySelected($event)"></app-categories>
 <app-announcement
 [message]="message"
  [title]="title"
  [author]="author"
  >
 </app-announcement>
-<app-categories (selectedCategory) ="onCategorySelected($event)"></app-categories>
 <div class="announcements">
   <h2>{{ title }}</h2>
   <p>{{ message }}</p>
@@ -14,8 +14,8 @@
         <p>title: {{ announcement.title }}</p>
         <p>message:{{ announcement.message }}</p>
         <p>Author: {{ announcement.author }}</p>
-        <p>Id: {{announcement.Id}}</p>
-        <p><img src="{{announcement.image}}" alt="image"></p>
+        <p>Id: {{announcement.id}}</p>
+        <p><img src="{{announcement.imageUrl}}" alt="image"></p>
       </ul>
   </div>
 
