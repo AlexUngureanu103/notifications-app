@@ -4,15 +4,19 @@
  [author]="author"
  >
 </app-announcement>
+<app-categories (selectedCategory) ="onCategorySelected($event)"></app-categories>
 <div class="announcements">
   <h2>{{ title }}</h2>
   <p>{{ message }}</p>
   <p>Author: {{ author }}</p>
   <div class = "app-container">
-      <ul *ngFor="let announcement of announcements" class="announcements">
+      <ul *ngFor="let announcement of filteredAnnouncements" class="announcements">
         <p>title: {{ announcement.title }}</p>
         <p>message:{{ announcement.message }}</p>
         <p>Author: {{ announcement.author }}</p>
+        <p>Id: {{announcement.Id}}</p>
+        <p><img src="{{announcement.image}}" alt="image"></p>
       </ul>
   </div>
-</div>
+
+

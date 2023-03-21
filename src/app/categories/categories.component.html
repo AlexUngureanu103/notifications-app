@@ -1,0 +1,5 @@
+<p>categories works!</p>
+<div class="categories-container">
+  <button mat-raised-button *ngFor="let category of categories" (click)="emitCategory(category)">{{category.name}}</button>
+</div>
+<button mat-raised-button (click)="resetFilters()">Reset</button>
