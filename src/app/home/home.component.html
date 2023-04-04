@@ -1,0 +1,28 @@
+
+<button routerLink="/add">Create </button>
+
+<app-add-announcement-form>
+
+</app-add-announcement-form>
+<app-categories (selectedCategory) ="onCategorySelected($event)"></app-categories>
+
+<app-announcement
+[message]="message"
+ [title]="title"
+ [author]="author"
+ >
+</app-announcement>
+<div class="announcements">
+  <h2>{{ title }}</h2>
+  <p>{{ message }}</p>
+  <p>Author: {{ author }}</p>
+  <div class = "app-container">
+      <ul *ngFor="let announcement of filteredAnnouncements" class="announcements">
+        <p>title: {{ announcement.title }}</p>
+        <p>message:{{ announcement.message }}</p>
+        <p>Author: {{ announcement.author }}</p>
+        <p>Id: {{announcement.id}}</p>
+        <p><img src="{{announcement.imageUrl}}" alt="image"></p>
+      </ul>
+  </div>
+
