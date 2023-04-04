@@ -1,61 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../announcement/announcement';
 import { Category } from '../announcement/category';
+import { AnnouncementService } from '../services/announcement.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent  implements OnInit{
   title = 'notifications-app';
   author = 'auth';
-  announcements :Announcement[] = [
-    {
-      title: "title",
-      message: "msg",
-      author: "John",
-      category:{
-        id:2,
-        name:"General"
-      },
-      id:"1",
-      imageUrl: "https://imgur.com/gallery/Otx13mJ"
-    },
-    {
-      id:"2",
-      title: "ttttt",
-      message: "ddddddd",
-      author: "CCC",
-      category:{
-        id:3,
-        name:"Laboratory"
-      },
-      imageUrl:"https://imgur.com/gallery/HdSCeXo"
-    },
-    {
-      title: "t2",
-      message: "m2",
-      author: "a2",
-      category:{
-        id:1,
-        name:"Course"
-      },
-      id:"3",
-      imageUrl:"https://imgur.com/gallery/COPCSqZ"
-    },
-    {
-      title: "t3",
-      message: "m3",
-      author: "a3",
-      category:{
-        id:1,
-        name:"Course"
-      },
-      id:"4",
-      imageUrl:"https://imgur.com/gallery/COPCSqZ"
-    }
-  ];
+  announcements :Announcement[];
+
   selectedCategory :Category;
   filteredAnnouncements =[];
 
@@ -73,4 +30,13 @@ export class HomeComponent {
     })
   }
   message ="msg";
+
+  constructor(private announcementService: AnnouncementService) { }
+  ngOnInit(): void {
+    this.announcementService.serviceCall();
+    this.announcementService.getAnnouncements().subscribe(announcements =>{
+      this.announcements = announcements;
+    });
+  }
+
 }

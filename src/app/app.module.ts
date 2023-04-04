@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import  {RouterModule} from '@angular/router'
 import { CommonModule } from '@angular/common';
+import { AnnouncementService } from './services/announcement.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     CommonModule
   ],
-  providers: [],
+  providers: [AnnouncementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
