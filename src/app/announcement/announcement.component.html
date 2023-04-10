@@ -1,13 +1,14 @@
-<p>announcement works!</p>
-<h1>Title : {{title}}</h1>
-<p>Message : {{ message }}</p> <br>
-<div>
-  <p> Author = {{author}}</p>
-</div>
-
-<div class ="announcement-container">
-  <p class="title">Title : {{title}}</p>
-  <p calss ="message">Message : {{ message }}</p>
-  <p class = "author"> By {{author}}</p>
-</div>
-
+<mat-card class = "annoucement-container">
+    <mat-card-header>
+        <mat-card-title class = "title">{{announcement.title}}</mat-card-title>
+        <mat-card-subtitle class = "author">{{announcement.author}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="announcement.imageUrl">
+    <mat-card-content>
+        <p class = "message">{{announcement.message}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="edit(announcement)">Edit</button>
+        <button mat-button color="warn" (click)="delete(announcement)">Delete</button>
+    </mat-card-actions>
+</mat-card>

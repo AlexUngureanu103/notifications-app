@@ -1,6 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Announcement } from '../announcement/announcement';
-import { Category } from '../announcement/category';
+import { Component } from '@angular/core';
+import { Category } from '../category';
+import { NgForm } from '@angular/forms';
+import { Announcement } from '../announcement';
+import { AnnouncementComponent } from '../announcement/announcement.component';
+import { AnnouncementService } from '../services/announcement.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-announcement-form',
@@ -8,39 +12,48 @@ import { Category } from '../announcement/category';
   styleUrls: ['./add-announcement-form.component.scss']
 })
 export class AddAnnouncementFormComponent {
-  title:string =  '';
-  author:string = '';
-  imageUrl:string = '';
-  message:string = '';
-  selectedCategory:Category ;
-  categories:Category[]=[
-    {
-      id:1,
-      name:"Course"
-    },
-    {
-      id:2,
-      name:"General"
-    },
-    {
-      id:3,
-      name:"Laboratory"
-    },
-  ];
-  @Output() addAnnouncement  : EventEmitter<Announcement> = new EventEmitter();
 
-  onSubmit(form){
-    const announcement:Announcement = {
-      title:this.title,
-      author:this.author,
-      message:this.message,
-      imageUrl:this.imageUrl,
-      category:this.categories.find(c=>c.name === this.selectedCategory.name),
-      id:Math.random().toString(36)
+  constructor(private announcementService: AnnouncementService, private route: ActivatedRoute,) { }
+  
+
+  title : string;
+  author : string;
+  imageUrl : string;
+  textField : string;
+  selectedCategory : Category;
+  categories : Category[];
+  id: number;
+  
+
+  ngOnInit() {
+    this.categories = this.announcementService.getCategories();
+    const id = this.route.snapshot.paramMap.get('id');
+    let parsedId: number = parseInt(id);
+    if (parsedId === -1) {
+      this.id = -1;
     }
-    // Console.log(announcement);
-    this.addAnnouncement.emit(announcement);
-    form.resetForm();
+    else{
+      const announcement = this.announcementService.getAnnouncementById(parsedId);
+      this.title = announcement.title;
+      this.author = announcement.author;
+      this.imageUrl = announcement.imageUrl;
+      this.selectedCategory = announcement.category;
+      this.textField = announcement.message;
+      this.id = parseInt(id);
+    }
   }
 
+  onSubmit(form: NgForm) {
+    console.log(form.value);
+
+    let announcement: Announcement = {
+      title: this.title,
+      message: this.textField,
+      author: this.author,
+      category: this.selectedCategory,
+      imageUrl: this.imageUrl,
+      id: this.id
+    }
+    this.announcementService.addAnnouncement(announcement);
+  }
 }

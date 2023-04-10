@@ -4,9 +4,14 @@ import { AddAnnouncementFormComponent } from './add-announcement-form/add-announ
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
-const routes:Routes =[{path: 'add', component:AddAnnouncementFormComponent},
-{path: '',component:HomeComponent, pathMatch: 'full'},
-{path: '**', redirectTo: ''}]
+
+
+const routes:Routes = [
+  {path : "add", redirectTo: '/add/-1', pathMatch: 'full'},
+  {path : "add/:id", component:AddAnnouncementFormComponent},
+  {path: '', component: HomeComponent, pathMatch:'full'},
+  //{ path: '**', redirectTo: '' }
+]
 
 @NgModule({
   declarations: [],
@@ -15,6 +20,4 @@ const routes:Routes =[{path: 'add', component:AddAnnouncementFormComponent},
     RouterModule.forRoot(routes)
   ]
 })
-
-export class AppRoutingModule {
- }
+export class AppRoutingModule { }

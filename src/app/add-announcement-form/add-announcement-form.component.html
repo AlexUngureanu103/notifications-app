@@ -1,34 +1,35 @@
-<button routerLink="/">Cancel</button>
 <form #announcementForm="ngForm" (ngSubmit)="onSubmit(announcementForm)">
-
-  <mat-form-field class="full-width">
+    <mat-form-field class ="full-width">
     <mat-label>Title</mat-label>
-    <input matInput placeholder="Title" [(ngModel)]="title" name="title" required>
-  </mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)] = "title" name = "title" required>
+    </mat-form-field>
 
-  <mat-form-field class="full-width">
-    <mat-label>Author</mat-label>
-    <input matInput placeholder="Author" [(ngModel)]="author" name="title" required>
-  </mat-form-field>
+    <mat-form-field class ="full-width">
+        <mat-label>Author</mat-label>
+        <input matInput placeholder="Author" [(ngModel)] = "author" name = "author" required>
+    </mat-form-field>
 
-  <mat-form-field class="full-width">
-    <mat-label>ImageUrl</mat-label>
-    <input matInput placeholder="ImageUrl" [(ngModel)]="imageUrl" name="title" required>
-  </mat-form-field>
+    <mat-form-field class ="full-width">
+        <mat-label>Image URL</mat-label>
+        <input matInput placeholder="imageUrl" [(ngModel)] = "imageUrl" name = "imageUrl" required>
+    </mat-form-field>
 
-  <mat-form-field class ="full-width">
-    <mat-label>Category</mat-label>
-    <mat-select [(value)]="selectedCategory">
-        <mat-option *ngFor="let categori of categories" [value]="categori">
-            {{ categori.name }}
-        </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field class ="full-width">
+        <mat-label>Category</mat-label>
+        <mat-select [(value)]="selectedCategory" name = "category" required>
+            <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
-  <mat-form-field class="full-width">
-    <mat-label>Leave a message</mat-label>
-    <textarea matInput placeholder="..." [(ngModel)]="message"></textarea>
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="onSubmit(announcementForm)">Add announcement</button>
+    <mat-form-field class ="full-width">
+        <mat-label>Leave a message</mat-label>
+        <textarea matInput placeholder="..." [(ngModel)] = "textField" name = "textArea" required></textarea>
+    </mat-form-field>
+
+    <button type="submit" mat-button color = "primary" [disabled]="!announcementForm.valid">Submit</button>
 </form>
-
+<div class="cancel-button">
+<button mat-button routerLink="/">Cancel</button>
+</div>

@@ -1,6 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Announcement } from './announcement/announcement';
-import { Category } from './announcement/category';
+import { Component } from '@angular/core'; 
 
 @Component({
   selector: 'app-root',
@@ -8,5 +6,5 @@ import { Category } from './announcement/category';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-}
+  title = 'notifications-app';
+ };

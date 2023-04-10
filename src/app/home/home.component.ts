@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Announcement } from '../announcement/announcement';
-import { Category } from '../announcement/category';
+import { Component } from '@angular/core';
+import { Announcement } from '../announcement';
+import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
 
 @Component({
@@ -8,35 +8,28 @@ import { AnnouncementService } from '../services/announcement.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent  implements OnInit{
+export class HomeComponent {
+
+  constructor( private announcementService: AnnouncementService ){}
+
   title = 'notifications-app';
-  author = 'auth';
-  announcements :Announcement[];
 
-  selectedCategory :Category;
-  filteredAnnouncements =[];
-
-  onCategorySelected(category:Category){
-    this.selectedCategory = category;
-    this.filterAnnouncements();
-  }
-  filterAnnouncements(){
-    if(this.selectedCategory  === null){
-      this.filteredAnnouncements = this.announcements;
-      return;
-    }
-    this.filteredAnnouncements = this.announcements.filter(announcement => {
-      return announcement.category.name === this.selectedCategory.name;
-    })
-  }
-  message ="msg";
-
-  constructor(private announcementService: AnnouncementService) { }
-  ngOnInit(): void {
-    this.announcementService.serviceCall();
-    this.announcementService.getAnnouncements().subscribe(announcements =>{
+  ngOnInit() {
+    this.announcementService.getAnnouncements().subscribe(announcements => {
       this.announcements = announcements;
     });
+    this.filteredAnnouncements = this.announcements;
+    this.announcementService.serviceCall();
   }
+
+  filteredAnnouncements : Announcement[];
+  announcements: Announcement[]
+
+    onCategorySelected(category: Category) {
+      this.filteredAnnouncements = this.announcements.filter(a => a.category.id === category.id);
+    }
+    onResetFilters(){
+      this.filteredAnnouncements = this.announcements;
+    }
 
 }

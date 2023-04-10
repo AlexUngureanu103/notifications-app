@@ -1,33 +1,28 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Category } from '../announcement/category';
-
+import { Category } from '../category';
+import { AnnouncementService } from '../services/announcement.service';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent {
-categories:Category[]=[
-  {
-    id:1,
-    name:"Course"
-  },
-  {
-    id:2,
-    name:"General"
-  },
-  {
-    id:3,
-    name:"Laboratory"
+
+  constructor(private announcementService: AnnouncementService) { }
+
+  categories : Category[];
+
+  ngOnInit() {
+    this.categories = this.announcementService.getCategories();
   }
-];
-@Output() selectedCategory = new EventEmitter<Category>();
 
-emitCategory(category:Category){
-  this.selectedCategory.emit(category);
-}
-resetFilters(){
-  this.selectedCategory.emit(null);
-}
-}
+  @Output() categorySelected = new EventEmitter<Category>();
+  @Output() resetFilters = new EventEmitter<void>();
 
+  onCategorySelected(category: Category) {
+    this.categorySelected.emit(category);
+  }
+  onResetFilters(){
+    this.resetFilters.emit();
+  }
+}

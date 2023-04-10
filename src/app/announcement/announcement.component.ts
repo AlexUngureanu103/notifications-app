@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import  {Category} from './category';
+import { Announcement } from '../announcement';
+import { AnnouncementService } from '../services/announcement.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-announcement',
@@ -7,7 +9,16 @@ import  {Category} from './category';
   styleUrls: ['./announcement.component.scss']
 })
 export class AnnouncementComponent {
-  @Input() message:string;
-  @Input() title:string;
-  @Input() author:string;
+  @Input() announcement : Announcement;
+
+  constructor( private announcementService: AnnouncementService, private router: Router ){}
+
+
+  edit(announcement: Announcement) {
+    this.router.navigate(['/add', announcement.id]);
+  }
+  
+  delete(announcement: Announcement) {
+    this.announcementService.deleteAnnouncement(announcement)
+  }
 }

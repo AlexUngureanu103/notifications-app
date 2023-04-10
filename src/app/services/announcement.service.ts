@@ -1,87 +1,93 @@
 import { Injectable } from '@angular/core';
-import { Announcement } from '../announcement/announcement';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Announcement } from '../announcement';
+import { Category } from '../category';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnouncementService {
 
-  constructor() {
-    // const observer = {
-    //   next: x => console.log('Observer got a next value: ' + x),
-    //   error: err => console.error('Observer got an error: '+ err),
-    //   complete: () => console.log('Observer got a complete notification'),
-    // };
-
-    // this.announcementService.getAnnouncements().subscribe(announcements => {
-    //   console.log(announcements);
-    // })
-
-    // this.announcementService.testObservable().subscribe(observer);
-   }
-
   serviceCall() {
-    console.log('service was called');
+    console.log("Service was called");
    }
+  constructor() { }
 
-  private announcements :Announcement[] = [
-    {
-      title: "title",
-      message: "msg",
-      author: "John",
-      category:{
-        id:2,
-        name:"General"
-      },
-      id:"1",
-      imageUrl: "https://imgur.com/gallery/Otx13mJ"
-    },
-    {
-      id:"2",
-      title: "ttttt",
-      message: "ddddddd",
-      author: "CCC",
-      category:{
-        id:3,
-        name:"Laboratory"
-      },
-      imageUrl:"https://imgur.com/gallery/HdSCeXo"
-    },
-    {
-      title: "t2",
-      message: "m2",
-      author: "a2",
-      category:{
-        id:1,
-        name:"Course"
-      },
-      id:"3",
-      imageUrl:"https://imgur.com/gallery/COPCSqZ"
-    },
-    {
-      title: "t3",
-      message: "m3",
-      author: "a3",
-      category:{
-        id:1,
-        name:"Course"
-      },
-      id:"4",
-      imageUrl:"https://imgur.com/gallery/COPCSqZ"
-    }
+  categories: Category[] = [
+    { id: 1, name: 'Course' },
+    { id: 2, name: 'General' },
+    { id: 3, name: 'Laboratory' }
   ];
 
-  private announcementsSubject = new BehaviorSubject<Announcement[]>([]);
-
-  addAnnouncement(announcement:Announcement): void {
-    this.announcements.push(announcement);
-
-    this.announcementsSubject.next(this.announcements);
+  announcements: Announcement[] = [
+    {
+      title: 'Notification 1',
+      message: 'Message 1',
+      author: 'Author 1',
+      category: this.categories[0],
+      imageUrl: 'url',
+      id: 0
+    },
+    {
+      title: 'Notification 2',
+      message: 'Message 2',
+      author: 'Author 2',
+      category: this.categories[1],
+      imageUrl: 'url',
+      id: 1
+    },
+    {
+      title: 'Notification 3',
+      message: 'Message 3',
+      author: 'Author 3',
+      category: this.categories[2],
+      imageUrl: 'url',
+      id: 2
+    }
+  ];
+  getAnnouncements(): Observable<Announcement[]> {
+    return of(this.announcements);
   }
 
-  getAnnouncements():Observable<Announcement[]>{
-    this.announcementsSubject.next(this.announcements);
-    return this.announcementsSubject.asObservable();
+  addAnnouncement(announcement: Announcement): void {
+    if(announcement.id === -1)
+    {
+      announcement.id = this.announcements[this.announcements.length-1].id +1;
+      this.announcements.push(announcement);
+    }
+    else{
+      const index = this.announcements.findIndex(a => a.id === announcement.id);
+      if (index !== -1) {
+        this.announcements[index] = announcement;
+      }
+    }
   }
+  getCategories(): Category[]{
+    return this.categories;
+  }
+  deleteAnnouncement(announcement :Announcement) {
+    const index = this.announcements.findIndex(a => a.id === announcement.id);
+    if (index !== -1) {
+      this.announcements.splice(index, 1);
+    }
+  }
+  getAnnouncementById(id: number) : Announcement{
+    const index = this.announcements.findIndex(a => a.id === id);
+    if (index !== -1) {
+      return this.announcements[index];
+    }
+    else{
+      let newAnnouncement: Announcement = {
+        title: '',
+        message: '',
+        author: '',
+        category: this.categories[0],
+        imageUrl: '',
+        id: this.announcements[this.announcements.length-1].id +1
+      }
+      this.announcements.push(newAnnouncement);
+      return newAnnouncement
+    }
+  }
+
 }
