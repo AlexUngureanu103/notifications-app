@@ -7,7 +7,19 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AnnouncementService {
 
-  constructor() { }
+  constructor() {
+    // const observer = {
+    //   next: x => console.log('Observer got a next value: ' + x),
+    //   error: err => console.error('Observer got an error: '+ err),
+    //   complete: () => console.log('Observer got a complete notification'),
+    // };
+
+    // this.announcementService.getAnnouncements().subscribe(announcements => {
+    //   console.log(announcements);
+    // })
+
+    // this.announcementService.testObservable().subscribe(observer);
+   }
 
   serviceCall() {
     console.log('service was called');
@@ -61,6 +73,12 @@ export class AnnouncementService {
   ];
 
   private announcementsSubject = new BehaviorSubject<Announcement[]>([]);
+
+  addAnnouncement(announcement:Announcement): void {
+    this.announcements.push(announcement);
+
+    this.announcementsSubject.next(this.announcements);
+  }
 
   getAnnouncements():Observable<Announcement[]>{
     this.announcementsSubject.next(this.announcements);

@@ -13,7 +13,7 @@ export class AddAnnouncementFormComponent {
   imageUrl:string = '';
   message:string = '';
   selectedCategory:Category ;
-  categories2:Category[]=[
+  categories:Category[]=[
     {
       id:1,
       name:"Course"
@@ -35,7 +35,7 @@ export class AddAnnouncementFormComponent {
       author:this.author,
       message:this.message,
       imageUrl:this.imageUrl,
-      category:this.categories2.find(c=>c.name === this.selectedCategory.name),
+      category:this.categories.find(c=>c.name === this.selectedCategory.name),
       id:Math.random().toString(36)
     }
     // Console.log(announcement);
