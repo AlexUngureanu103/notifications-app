@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router'
 import { AnnouncementService } from './services/announcement.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     AppRoutingModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [AnnouncementService],
   bootstrap: [AppComponent]

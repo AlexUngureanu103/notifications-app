@@ -16,9 +16,9 @@
 
     <mat-form-field class ="full-width">
         <mat-label>Category</mat-label>
-        <mat-select [(value)]="selectedCategory" name = "category" required>
+        <mat-select [(value)]="selectedCategoryId" name = "category" required>
             <mat-option *ngFor="let category of categories" [value]="category">
-                {{ category }}
+                {{ category.name }}
             </mat-option>
         </mat-select>
     </mat-form-field>

@@ -1,5 +1,5 @@
 <div class = 'app-container'>
-    <app-categories (categorySelected)="onCategorySelected($event)" (resetFilters)="onResetFilters()"></app-categories>
+    <app-categories (categorySelected)="onCategorySelected($event.id)" (resetFilters)="onResetFilters()"></app-categories>
     <ul>
         <app-announcement *ngFor="let announcement of filteredAnnouncements" [announcement]="announcement"></app-announcement>
     </ul>

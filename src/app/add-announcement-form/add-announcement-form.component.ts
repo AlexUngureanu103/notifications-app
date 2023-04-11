@@ -14,32 +14,31 @@ import { ActivatedRoute } from '@angular/router';
 export class AddAnnouncementFormComponent {
 
   constructor(private announcementService: AnnouncementService, private route: ActivatedRoute,) { }
-
+  
 
   title : string;
   author : string;
   imageUrl : string;
   textField : string;
-  selectedCategory : string;
-  categories : string[];
-  id: number;
-
+  selectedCategoryId : string;
+  categories : Category[];
+  id: string;
+  
 
   ngOnInit() {
     this.categories = this.announcementService.getCategories();
     const id = this.route.snapshot.paramMap.get('id');
-    let parsedId: number = parseInt(id);
-    if (parsedId === -1) {
-      this.id = -1;
+    if (id === "-1") {
+      this.id = "-1";
     }
     else{
-      const announcement = this.announcementService.getAnnouncementById(parsedId);
+      const announcement = this.announcementService.getAnnouncementById(id);
       this.title = announcement.title;
       this.author = announcement.author;
       this.imageUrl = announcement.imageUrl;
-      this.selectedCategory = announcement.categoryId;
+      this.selectedCategoryId = announcement.categoryId;
       this.textField = announcement.message;
-      this.id = parseInt(id);
+      this.id = id;
     }
   }
 
@@ -50,7 +49,7 @@ export class AddAnnouncementFormComponent {
       title: this.title,
       message: this.textField,
       author: this.author,
-      categoryId: this.selectedCategory,
+      categoryId: this.selectedCategoryId,
       imageUrl: this.imageUrl,
       id: this.id
     }

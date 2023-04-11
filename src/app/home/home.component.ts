@@ -25,11 +25,11 @@ export class HomeComponent {
   filteredAnnouncements : Announcement[];
   announcements: Announcement[]
 
-    onCategorySelected(category: string) {
-      this.filteredAnnouncements = this.announcements.filter(a => a.categoryId === category);
+    onCategorySelected(id: string) {
+      this.filteredAnnouncements = this.announcements.filter(a => a.categoryId === id);
     }
     onResetFilters(){
       this.filteredAnnouncements = this.announcements;
     }
-
+    
 }
