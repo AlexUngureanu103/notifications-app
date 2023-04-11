@@ -1,4 +1,4 @@
 <div>
-    <button mat-raised-button mat-button color = "primary" (click)="onCategorySelected(category)" class="category-button" *ngFor="let category of categories">{{ category.name }}</button>
+    <button mat-raised-button mat-button color = "primary" (click)="onCategorySelected(category)" class="category-button" *ngFor="let category of categories">{{ category }}</button>
     <button class="category-button" (click)="onResetFilters()" mat-button color = "primary">Reset Filters</button>
 </div>

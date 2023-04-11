@@ -13,10 +13,10 @@ export class AnnouncementService {
    }
   constructor() { }
 
-  categories: Category[] = [
-    { id: 1, name: 'Course' },
-    { id: 2, name: 'General' },
-    { id: 3, name: 'Laboratory' }
+  categories: string[] = [
+    "0",
+    "1",
+    "2"
   ];
 
   announcements: Announcement[] = [
@@ -24,7 +24,7 @@ export class AnnouncementService {
       title: 'Notification 1',
       message: 'Message 1',
       author: 'Author 1',
-      category: this.categories[0],
+      categoryId: this.categories[0],
       imageUrl: 'url',
       id: 0
     },
@@ -32,7 +32,7 @@ export class AnnouncementService {
       title: 'Notification 2',
       message: 'Message 2',
       author: 'Author 2',
-      category: this.categories[1],
+      categoryId: this.categories[1],
       imageUrl: 'url',
       id: 1
     },
@@ -40,7 +40,7 @@ export class AnnouncementService {
       title: 'Notification 3',
       message: 'Message 3',
       author: 'Author 3',
-      category: this.categories[2],
+      categoryId: this.categories[2],
       imageUrl: 'url',
       id: 2
     }
@@ -62,7 +62,7 @@ export class AnnouncementService {
       }
     }
   }
-  getCategories(): Category[]{
+  getCategories(): string[]{
     return this.categories;
   }
   deleteAnnouncement(announcement :Announcement) {
@@ -81,7 +81,7 @@ export class AnnouncementService {
         title: '',
         message: '',
         author: '',
-        category: this.categories[0],
+        categoryId: this.categories[0],
         imageUrl: '',
         id: this.announcements[this.announcements.length-1].id +1
       }

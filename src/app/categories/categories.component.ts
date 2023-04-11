@@ -10,16 +10,16 @@ export class CategoriesComponent {
 
   constructor(private announcementService: AnnouncementService) { }
 
-  categories : Category[];
+  categories : string[];
 
   ngOnInit() {
     this.categories = this.announcementService.getCategories();
   }
 
-  @Output() categorySelected = new EventEmitter<Category>();
+  @Output() categorySelected = new EventEmitter<string>();
   @Output() resetFilters = new EventEmitter<void>();
 
-  onCategorySelected(category: Category) {
+  onCategorySelected(category: string) {
     this.categorySelected.emit(category);
   }
   onResetFilters(){
