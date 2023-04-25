@@ -13,7 +13,7 @@ export class AnnouncementService {
   serviceCall() {
     console.log("Service was called");
    }
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   categories: Category[] = [
     { id: "1", name: 'Course' },
@@ -48,14 +48,13 @@ export class AnnouncementService {
     }*/
   ];
   getAnnouncements(): Observable<Announcement[]> {
-    return this.http.get<Announcement[]>(this.baseURL);
+    return this.httpClient.get<Announcement[]>(this.baseURL);
   }
 
   addAnnouncement(announcement: Announcement): void {
-    if(announcement.id === "new")
-    {
-      announcement.id = this.announcements[this.announcements.length-1].id +1;
-      this.announcements.push(announcement);
+    if(announcement.id === 'new'){
+      announcement.id = this.announcements[this.announcements.length-1].id+1;
+      this.httpClient.post<Announcement>(this.baseURL,announcement,this.httpOptions);
     }
     else{
       const index = this.announcements.findIndex(a => a.id === announcement.id);
@@ -67,11 +66,8 @@ export class AnnouncementService {
   getCategories(): Category[]{
     return this.categories;
   }
-  deleteAnnouncement(announcement :Announcement) {
-    const index = this.announcements.findIndex(a => a.id === announcement.id);
-    if (index !== -1) {
-      this.announcements.splice(index, 1);
-    }
+  deleteAnnouncement(id :string ):Observable<Announcement> {
+    return this.httpClient.delete<Announcement>(this.baseURL + '/' + id,this.httpOptions);
   }
   getAnnouncementById(id: string) : Announcement{
     const index = this.announcements.findIndex(a => a.id === id);

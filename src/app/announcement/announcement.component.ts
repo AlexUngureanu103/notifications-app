@@ -17,8 +17,8 @@ export class AnnouncementComponent {
   edit(announcement: Announcement) {
     this.router.navigate(['/add', announcement.id]);
   }
-  
+
   delete(announcement: Announcement) {
-    this.announcementService.deleteAnnouncement(announcement)
+    this.announcementService.deleteAnnouncement(announcement.id).subscribe();
   }
 }

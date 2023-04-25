@@ -15,8 +15,8 @@ export class HomeComponent {
   title = 'notifications-app';
 
   ngOnInit() {
-    this.announcementService.getAnnouncements().subscribe(announcements => {
-      this.announcements = announcements;
+    this.announcementService.getAnnouncements().subscribe(data => {
+      this.announcements = data;
     });
     this.filteredAnnouncements = this.announcements;
     this.announcementService.serviceCall();
@@ -25,11 +25,11 @@ export class HomeComponent {
   filteredAnnouncements : Announcement[];
   announcements: Announcement[]
 
-    onCategorySelected(id: string) {
-      this.filteredAnnouncements = this.announcements.filter(a => a.categoryId === id);
-    }
-    onResetFilters(){
-      this.filteredAnnouncements = this.announcements;
-    }
-    
+  onCategorySelected(id: string) {
+    this.filteredAnnouncements = this.announcements.filter(a => a.categoryId === id);
+  }
+  onResetFilters(){
+   this.filteredAnnouncements = this.announcements;
+  }
+
 }
