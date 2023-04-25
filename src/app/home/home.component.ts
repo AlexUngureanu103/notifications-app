@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-home',

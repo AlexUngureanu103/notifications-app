@@ -19,8 +19,8 @@ export class CategoryService {
   };
    constructor(private httpClient: HttpClient) { }
 
-   getCategories():Observable<Category>{
-    return this.httpClient.get<Category>(this.baseURL,this.httpOptions);
+   getCategories():Observable<Category[]>{
+    return this.httpClient.get<Category[]>(this.baseURL,this.httpOptions);
    }
 
    getCategoriesById(id:string) :Observable<Category>{

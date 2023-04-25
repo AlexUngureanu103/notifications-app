@@ -5,6 +5,7 @@ import { Announcement } from '../announcement';
 import { AnnouncementComponent } from '../announcement/announcement.component';
 import { AnnouncementService } from '../services/announcement.service';
 import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-add-announcement-form',
@@ -13,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddAnnouncementFormComponent {
 
-  constructor(private announcementService: AnnouncementService, private route: ActivatedRoute,) { }
+  constructor(private announcementService: AnnouncementService, private route: ActivatedRoute,private categoryService:CategoryService) { }
 
 
   title : string;
@@ -26,7 +27,9 @@ export class AddAnnouncementFormComponent {
 
 
   ngOnInit() {
-    this.categories = this.announcementService.getCategories();
+    this.categoryService.getCategories().subscribe(data => {
+      this.categories = data;
+    });
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id !== "-1") {
       this.announcementService.getAnnouncementById(this.id).subscribe(data =>{

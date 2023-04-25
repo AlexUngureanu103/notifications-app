@@ -15,12 +15,6 @@ export class AnnouncementService {
    }
   constructor(private httpClient: HttpClient) { }
 
-  categories: Category[] = [
-    { id: "1", name: 'Course' },
-    { id: "2", name: 'General' },
-    { id: "3", name: 'Laboratory' }
-  ];
-
   getAnnouncements(): Observable<Announcement[]> {
     return this.httpClient.get<Announcement[]>(this.baseURL);
   }
@@ -31,10 +25,6 @@ export class AnnouncementService {
 
   editAnnouncement(announcement: Announcement  ):Observable<Announcement>{
     return this.httpClient.put<Announcement>(this.baseURL+ '/' + announcement.id , announcement , this.httpOptions);
-  }
-
-  getCategories(): Category[]{
-    return this.categories;
   }
 
   deleteAnnouncement(id :string ):Observable<Announcement> {
