@@ -21,32 +21,6 @@ export class AnnouncementService {
     { id: "3", name: 'Laboratory' }
   ];
 
-  announcements: Announcement[] = [
-    /*{
-      title: 'Notification 1',
-      message: 'Message 1',
-      author: 'Author 1',
-      categoryId: this.categories[0].id,
-      imageUrl: 'url',
-      id: 0
-    },
-    {
-      title: 'Notification 2',
-      message: 'Message 2',
-      author: 'Author 2',
-      categoryId: this.categories[1].id,
-      imageUrl: 'url',
-      id: 1
-    },
-    {
-      title: 'Notification 3',
-      message: 'Message 3',
-      author: 'Author 3',
-      categoryId: this.categories[2].id,
-      imageUrl: 'url',
-      id: 2
-    }*/
-  ];
   getAnnouncements(): Observable<Announcement[]> {
     return this.httpClient.get<Announcement[]>(this.baseURL);
   }
@@ -76,6 +50,4 @@ export class AnnouncementService {
       'Content-Type':  'application/json',
     })
   };
-
-
 }
