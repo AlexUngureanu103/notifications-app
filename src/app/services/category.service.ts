@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '../category';
@@ -12,10 +12,18 @@ export class CategoryService {
   serviceCall() {
     console.log("Service was called");
    }
-
+   readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+    })
+  };
    constructor(private httpClient: HttpClient) { }
 
    getCategories():Observable<Category>{
-    return this.httpClient.get<Category>(this.baseURL);
+    return this.httpClient.get<Category>(this.baseURL,this.httpOptions);
+   }
+
+   getCategoriesById(id:string) :Observable<Category>{
+    return this.httpClient.get<Category>(this.baseURL + '/' +id,this.httpOptions);
    }
   }
