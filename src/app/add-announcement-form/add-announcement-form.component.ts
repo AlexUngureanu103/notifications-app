@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AddAnnouncementFormComponent {
 
   constructor(private announcementService: AnnouncementService, private route: ActivatedRoute,) { }
-  
+
 
   title : string;
   author : string;
@@ -23,22 +23,19 @@ export class AddAnnouncementFormComponent {
   selectedCategoryId : string;
   categories : Category[];
   id: string;
-  
+
 
   ngOnInit() {
     this.categories = this.announcementService.getCategories();
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id === "-1") {
-      this.id = "-1";
-    }
-    else{
-      const announcement = this.announcementService.getAnnouncementById(id);
-      this.title = announcement.title;
-      this.author = announcement.author;
-      this.imageUrl = announcement.imageUrl;
-      this.selectedCategoryId = announcement.categoryId;
-      this.textField = announcement.message;
-      this.id = id;
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id !== "-1") {
+      this.announcementService.getAnnouncementById(this.id).subscribe(data =>{
+        this.title = data.title;
+        this.author = data.author;
+        this.imageUrl = data.imageUrl;
+        this.selectedCategoryId = data.categoryId;
+        this.textField = data.message;
+      });
     }
   }
 
@@ -53,6 +50,13 @@ export class AddAnnouncementFormComponent {
       imageUrl: this.imageUrl,
       id: this.id
     }
-    this.announcementService.addAnnouncement(announcement);
+    console.log(announcement.id);
+
+    if(  this.id === "-1"){
+      this.announcementService.addAnnouncement(announcement).subscribe();
+    }
+    else{
+      this.announcementService.editAnnouncement(announcement).subscribe();
+    }
   }
 }

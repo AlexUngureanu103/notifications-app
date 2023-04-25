@@ -51,41 +51,25 @@ export class AnnouncementService {
     return this.httpClient.get<Announcement[]>(this.baseURL);
   }
 
-  addAnnouncement(announcement: Announcement): void {
-    if(announcement.id === 'new'){
-      announcement.id = this.announcements[this.announcements.length-1].id+1;
-      this.httpClient.post<Announcement>(this.baseURL,announcement,this.httpOptions);
-    }
-    else{
-      const index = this.announcements.findIndex(a => a.id === announcement.id);
-      if (index !== -1) {
-        this.announcements[index] = announcement;
-      }
-    }
+  addAnnouncement(announcement: Announcement): Observable<Announcement>  {
+    return  this.httpClient.post<Announcement>(this.baseURL,announcement,this.httpOptions);
   }
+
+  editAnnouncement(announcement: Announcement  ):Observable<Announcement>{
+    return this.httpClient.put<Announcement>(this.baseURL+ '/' + announcement.id , announcement , this.httpOptions);
+  }
+
   getCategories(): Category[]{
     return this.categories;
   }
+
   deleteAnnouncement(id :string ):Observable<Announcement> {
     return this.httpClient.delete<Announcement>(this.baseURL + '/' + id,this.httpOptions);
   }
-  getAnnouncementById(id: string) : Announcement{
-    const index = this.announcements.findIndex(a => a.id === id);
-    if (index !== -1) {
-      return this.announcements[index];
-    }
-    else{
-      let newAnnouncement: Announcement = {
-        title: '',
-        message: '',
-        author: '',
-        categoryId: this.categories[0].id,
-        imageUrl: '',
-        id: this.announcements[this.announcements.length-1].id +1
-      }
-      this.announcements.push(newAnnouncement);
-      return newAnnouncement
-    }
+
+  index:number;
+  getAnnouncementById(id: string) : Observable<Announcement>{
+    return this.httpClient.get<Announcement>(this.baseURL + '/' +id ,this.httpOptions);
   }
   readonly httpOptions = {
     headers: new HttpHeaders({
