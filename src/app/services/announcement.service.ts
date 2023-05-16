@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AnnouncementService {
 
-  baseURL: string = "https://newsapi20221108120432.azurewebsites.net/api/Announcements"
+  baseURL: string = "https://localhost:7038/Announcement"
   serviceCall() {
     console.log("Service was called");
    }

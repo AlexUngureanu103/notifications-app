@@ -6,6 +6,7 @@ import { AnnouncementComponent } from '../announcement/announcement.component';
 import { AnnouncementService } from '../services/announcement.service';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../services/category.service';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-add-announcement-form',
@@ -14,7 +15,7 @@ import { CategoryService } from '../services/category.service';
 })
 export class AddAnnouncementFormComponent {
 
-  constructor(private announcementService: AnnouncementService, private route: ActivatedRoute,private categoryService:CategoryService) { }
+  constructor(private announcementService: AnnouncementService, private notificationService:NotificationService, private route: ActivatedRoute,private categoryService:CategoryService) { }
 
 
   title : string;
@@ -56,8 +57,8 @@ export class AddAnnouncementFormComponent {
     console.log(announcement.id);
 
     if(  this.id === "-1"){
-      this.announcementService.addAnnouncement(announcement).subscribe();
-    }
+
+      this.announcementService.addAnnouncement(announcement).subscribe(r => this.notificationService.sendMessage("BroadcastMessage", [r]));    }
     else{
       this.announcementService.editAnnouncement(announcement).subscribe();
     }

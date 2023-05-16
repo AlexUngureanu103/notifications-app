@@ -1,4 +1,7 @@
 <div class = 'app-container'>
+  <p>
+    {{notificationMessage}}
+  </p>
     <app-categories (categorySelected)="onCategorySelected($event.id)" (resetFilters)="onResetFilters()"></app-categories>
     <ul>
         <app-announcement *ngFor="let announcement of filteredAnnouncements" [announcement]="announcement"></app-announcement>
