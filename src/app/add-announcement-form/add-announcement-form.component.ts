@@ -68,7 +68,7 @@ export class AddAnnouncementFormComponent {
     else{
 
       this.announcementService.editAnnouncement(announcement).subscribe(r => {
-        window.location.reload();
+        this.notificationService.sendMessage("BroadcastMessage", [r])
         this.router.navigateByUrl("");
       });
     }
