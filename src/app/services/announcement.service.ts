@@ -23,7 +23,7 @@ export class AnnouncementService {
     return  this.httpClient.post<Announcement>(this.baseURL,announcement,this.httpOptions);
   }
 
-  editAnnouncement(announcement: Announcement  ):Observable<Announcement>{
+  editAnnouncement(announcement: Announcement): Observable<Announcement>{
     return this.httpClient.put<Announcement>(this.baseURL+ '/' + announcement.id , announcement , this.httpOptions);
   }
 

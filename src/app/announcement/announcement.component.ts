@@ -20,5 +20,6 @@ export class AnnouncementComponent {
 
   delete(announcement: Announcement) {
     this.announcementService.deleteAnnouncement(announcement.id).subscribe();
+    window.location.reload();
   }
 }

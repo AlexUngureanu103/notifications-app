@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Announcement } from '../announcement';
 import { AnnouncementComponent } from '../announcement/announcement.component';
 import { AnnouncementService } from '../services/announcement.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../services/category.service';
 import { NotificationService } from '../notification.service';
 
@@ -15,7 +15,8 @@ import { NotificationService } from '../notification.service';
 })
 export class AddAnnouncementFormComponent {
 
-  constructor(private announcementService: AnnouncementService, private notificationService:NotificationService, private route: ActivatedRoute,private categoryService:CategoryService) { }
+  constructor(private announcementService: AnnouncementService, private notificationService:NotificationService, private route: ActivatedRoute,
+    private categoryService:CategoryService , private router:Router) { }
 
 
   title : string;
@@ -58,9 +59,19 @@ export class AddAnnouncementFormComponent {
 
     if(  this.id === "-1"){
 
-      this.announcementService.addAnnouncement(announcement).subscribe(r => this.notificationService.sendMessage("BroadcastMessage", [r]));    }
-    else{
-      this.announcementService.editAnnouncement(announcement).subscribe();
+      this.announcementService.addAnnouncement(announcement).subscribe(r => {
+        this.notificationService.sendMessage("BroadcastMessage", [r])
+        this.router.navigateByUrl("");
+      });
+
     }
+    else{
+
+      this.announcementService.editAnnouncement(announcement).subscribe(r => {
+        window.location.reload();
+        this.router.navigateByUrl("");
+      });
+    }
+
   }
 }

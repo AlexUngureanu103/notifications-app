@@ -8,7 +8,7 @@ import { Category } from '../category';
 })
 export class CategoryService {
 
-  baseURL: string = "https://newsapi20221108120432.azurewebsites.net/api/Categories"
+  baseURL: string = "https://localhost:7038/Category"
   serviceCall() {
     console.log("Service was called");
    }
