@@ -8,7 +8,7 @@ import { Category } from '../category';
 })
 export class CategoryService {
 
-  baseURL: string = "https://newsapi20221108120432.azurewebsites.net/api/Categories"
+  baseURL: string = "https://localhost:7038/Category"
   serviceCall() {
     console.log("Service was called");
    }
@@ -19,8 +19,8 @@ export class CategoryService {
   };
    constructor(private httpClient: HttpClient) { }
 
-   getCategories():Observable<Category>{
-    return this.httpClient.get<Category>(this.baseURL,this.httpOptions);
+   getCategories():Observable<Category[]>{
+    return this.httpClient.get<Category[]>(this.baseURL,this.httpOptions);
    }
 
    getCategoriesById(id:string) :Observable<Category>{

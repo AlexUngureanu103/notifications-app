@@ -21,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 
+import { NotificationService } from './notification.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     HttpClientModule
   ],
-  providers: [AnnouncementService],
+  providers: [AnnouncementService,NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

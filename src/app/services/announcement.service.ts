@@ -9,17 +9,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AnnouncementService {
 
-  baseURL: string = "https://newsapi20221108120432.azurewebsites.net/api/Announcements"
+  baseURL: string = "https://localhost:7038/Announcement"
   serviceCall() {
     console.log("Service was called");
    }
   constructor(private httpClient: HttpClient) { }
-
-  categories: Category[] = [
-    { id: "1", name: 'Course' },
-    { id: "2", name: 'General' },
-    { id: "3", name: 'Laboratory' }
-  ];
 
   getAnnouncements(): Observable<Announcement[]> {
     return this.httpClient.get<Announcement[]>(this.baseURL);
@@ -29,12 +23,8 @@ export class AnnouncementService {
     return  this.httpClient.post<Announcement>(this.baseURL,announcement,this.httpOptions);
   }
 
-  editAnnouncement(announcement: Announcement  ):Observable<Announcement>{
+  editAnnouncement(announcement: Announcement): Observable<Announcement>{
     return this.httpClient.put<Announcement>(this.baseURL+ '/' + announcement.id , announcement , this.httpOptions);
-  }
-
-  getCategories(): Category[]{
-    return this.categories;
   }
 
   deleteAnnouncement(id :string ):Observable<Announcement> {

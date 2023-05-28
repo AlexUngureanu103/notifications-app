@@ -4,7 +4,9 @@ import { NgForm } from '@angular/forms';
 import { Announcement } from '../announcement';
 import { AnnouncementComponent } from '../announcement/announcement.component';
 import { AnnouncementService } from '../services/announcement.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CategoryService } from '../services/category.service';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-add-announcement-form',
@@ -13,7 +15,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddAnnouncementFormComponent {
 
-  constructor(private announcementService: AnnouncementService, private route: ActivatedRoute,) { }
+  constructor(private announcementService: AnnouncementService, private notificationService:NotificationService, private route: ActivatedRoute,
+    private categoryService:CategoryService , private router:Router) { }
 
 
   title : string;
@@ -26,7 +29,9 @@ export class AddAnnouncementFormComponent {
 
 
   ngOnInit() {
-    this.categories = this.announcementService.getCategories();
+    this.categoryService.getCategories().subscribe(data => {
+      this.categories = data;
+    });
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id !== "-1") {
       this.announcementService.getAnnouncementById(this.id).subscribe(data =>{
@@ -53,10 +58,20 @@ export class AddAnnouncementFormComponent {
     console.log(announcement.id);
 
     if(  this.id === "-1"){
-      this.announcementService.addAnnouncement(announcement).subscribe();
+
+      this.announcementService.addAnnouncement(announcement).subscribe(r => {
+        this.notificationService.sendMessage("BroadcastMessage", [r])
+        this.router.navigateByUrl("");
+      });
+
     }
     else{
-      this.announcementService.editAnnouncement(announcement).subscribe();
+
+      this.announcementService.editAnnouncement(announcement).subscribe(r => {
+        this.notificationService.sendMessage("BroadcastMessage", [r])
+        this.router.navigateByUrl("");
+      });
     }
+
   }
 }
