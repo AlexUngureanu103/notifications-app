@@ -23,8 +23,9 @@ export class HomeComponent {
 
     this.announcementService.getAnnouncements().subscribe(data => {
       this.announcements = data;
+      this.filteredAnnouncements = this.announcements;
     });
-    this.filteredAnnouncements = this.announcements;
+
     this.announcementService.serviceCall();
 
   }
