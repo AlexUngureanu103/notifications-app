@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class AnnouncementComponent {
   @Input() announcement : Announcement;
 
+  @Input()  author: string;
+
   constructor( private announcementService: AnnouncementService, private router: Router ){}
 
 

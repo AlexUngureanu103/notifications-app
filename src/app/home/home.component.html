@@ -4,7 +4,7 @@
   </p>
     <app-categories (categorySelected)="onCategorySelected($event.id)" (resetFilters)="onResetFilters()"></app-categories>
     <ul>
-        <app-announcement *ngFor="let announcement of filteredAnnouncements" [announcement]="announcement"></app-announcement>
+        <app-announcement *ngFor="let announcement of filteredAnnouncements" [announcement]="announcement"  [author]="announcement | authorName"></app-announcement>
     </ul>
     <button mat-raised-button color="primary" [routerLink]="'/add/-1'">Create New Post</button>
 </div>
