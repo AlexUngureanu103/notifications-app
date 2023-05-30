@@ -5,10 +5,13 @@
     align-items: center;
     gap:20px;
     height:auto;
-    border: 2px solid #FFCACA;
+    border: 2px solid #FFdACA;
     border-radius: 25px;
     padding: 30px;
-}
+
+    .img{
+      width: 70%;
+    }
     .title {
       font-size: 20px;
       font-weight: 700;
@@ -24,5 +27,4 @@
       align-self: flex-start;
       font-weight: 600;
     }
-
-  
+  }
